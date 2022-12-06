@@ -1,0 +1,341 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 8.3.12
+-- Dumped by pg_dump version 10.22 (Ubuntu 10.22-0ubuntu0.18.04.1)
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'SQL_ASCII';
+SET standard_conforming_strings = off;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET escape_string_warning = off;
+SET row_security = off;
+
+SET default_tablespace = '';
+
+SET default_with_oids = true;
+
+--
+-- Name: etudiant; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.etudiant (
+    etudiant_id integer NOT NULL,
+    nom character(20) NOT NULL,
+    prenom character(20) NOT NULL
+);
+
+
+--
+-- Name: etudiant_td; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.etudiant_td (
+    etudiant_id integer NOT NULL,
+    ue_id integer NOT NULL,
+    groupe integer NOT NULL
+);
+
+
+--
+-- Name: etudiant_ue; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.etudiant_ue (
+    etudiant_id integer NOT NULL,
+    ue_id integer NOT NULL
+);
+
+
+--
+-- Name: td; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.td (
+    ue_id integer NOT NULL,
+    groupe integer NOT NULL,
+    jour character(8),
+    horaire character(11),
+    salle character(10)
+);
+
+
+--
+-- Name: ue; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.ue (
+    ue_id integer NOT NULL,
+    ue_nom character(20) NOT NULL
+);
+
+
+--
+-- Data for Name: etudiant; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+INSERT INTO public.etudiant VALUES (2, 'AUBIAN              ', 'Christian           ');
+INSERT INTO public.etudiant VALUES (3, 'BACH                ', 'Laure               ');
+INSERT INTO public.etudiant VALUES (4, 'BAZIN               ', 'Fabienne            ');
+INSERT INTO public.etudiant VALUES (6, 'BOUCHER             ', 'Audrey              ');
+INSERT INTO public.etudiant VALUES (7, 'BOURDEAU            ', 'Pauline             ');
+INSERT INTO public.etudiant VALUES (8, 'BOURQUIN            ', 'Philippe            ');
+INSERT INTO public.etudiant VALUES (9, 'BRETECHE            ', 'Helen               ');
+INSERT INTO public.etudiant VALUES (10, 'BRUNEL              ', 'Brigitte            ');
+INSERT INTO public.etudiant VALUES (11, 'BUIDUY              ', 'Laurent             ');
+INSERT INTO public.etudiant VALUES (12, 'CAO                 ', 'Kheng               ');
+INSERT INTO public.etudiant VALUES (13, 'CELINI              ', 'Sandrine            ');
+INSERT INTO public.etudiant VALUES (15, 'CHARDON             ', 'Camille             ');
+INSERT INTO public.etudiant VALUES (16, 'COLLY               ', 'Anne-Violaine       ');
+INSERT INTO public.etudiant VALUES (18, 'CUISSET             ', 'Vincent             ');
+INSERT INTO public.etudiant VALUES (19, 'DE MONTFORT         ', 'Aymeric             ');
+INSERT INTO public.etudiant VALUES (22, 'FERNANDEZ           ', 'Phillippe           ');
+INSERT INTO public.etudiant VALUES (23, 'GAUTHIER            ', 'Estelle             ');
+INSERT INTO public.etudiant VALUES (25, 'GUILLON             ', 'Juiliette           ');
+INSERT INTO public.etudiant VALUES (26, 'GUILLONNEAU         ', 'Sophie              ');
+INSERT INTO public.etudiant VALUES (27, 'HELSON              ', 'Christophe          ');
+INSERT INTO public.etudiant VALUES (29, 'HUYNH               ', 'Jdelenia Slyvia     ');
+INSERT INTO public.etudiant VALUES (30, 'IHADDADENE          ', 'Karima              ');
+INSERT INTO public.etudiant VALUES (31, 'JONCHERY            ', 'Claire              ');
+INSERT INTO public.etudiant VALUES (33, 'LAINE               ', 'Mathilde            ');
+INSERT INTO public.etudiant VALUES (34, 'LANOY               ', 'Emile               ');
+INSERT INTO public.etudiant VALUES (35, 'LARDIN              ', 'Anne                ');
+INSERT INTO public.etudiant VALUES (36, 'MARTIGNON           ', 'Gilles              ');
+INSERT INTO public.etudiant VALUES (37, 'MOREL               ', 'Eric                ');
+INSERT INTO public.etudiant VALUES (38, 'MORIN               ', 'Delphine            ');
+INSERT INTO public.etudiant VALUES (39, 'MOUNIER             ', 'Paul                ');
+INSERT INTO public.etudiant VALUES (40, 'NGUYEN              ', 'Sophie              ');
+INSERT INTO public.etudiant VALUES (43, 'POUGET              ', 'Yann                ');
+INSERT INTO public.etudiant VALUES (44, 'PRIMAS              ', 'Hugo                ');
+INSERT INTO public.etudiant VALUES (45, 'PRUVOST             ', 'Fabien              ');
+INSERT INTO public.etudiant VALUES (47, 'RAVADARISOA         ', 'Razafindramisa      ');
+INSERT INTO public.etudiant VALUES (48, 'SAGNA               ', 'Carlos              ');
+INSERT INTO public.etudiant VALUES (49, 'SUZANNE             ', 'Isabelle            ');
+INSERT INTO public.etudiant VALUES (50, 'TAJEDDINE           ', 'Amal                ');
+INSERT INTO public.etudiant VALUES (51, 'THABUY              ', 'Juliane             ');
+INSERT INTO public.etudiant VALUES (52, 'TRABELSI            ', 'Emmanuel            ');
+INSERT INTO public.etudiant VALUES (54, 'Dupont              ', 'Pierre              ');
+INSERT INTO public.etudiant VALUES (55, 'Durand              ', 'Pierre              ');
+INSERT INTO public.etudiant VALUES (1, 'AFFRE               ', 'Sébastien          ');
+INSERT INTO public.etudiant VALUES (5, 'BODEREAU            ', 'Angélique          ');
+INSERT INTO public.etudiant VALUES (14, 'CHABERNAUD          ', 'Hélène            ');
+INSERT INTO public.etudiant VALUES (17, 'CORDAILLAT          ', 'Véronique          ');
+INSERT INTO public.etudiant VALUES (21, 'FAURE               ', 'Hélène            ');
+INSERT INTO public.etudiant VALUES (24, 'GUILLAUM E          ', 'Séverine           ');
+INSERT INTO public.etudiant VALUES (28, 'HEURTEL             ', 'Hélène            ');
+INSERT INTO public.etudiant VALUES (46, 'RAPION              ', 'Jérôme            ');
+INSERT INTO public.etudiant VALUES (53, 'VANDROMME           ', 'Frédéric          ');
+INSERT INTO public.etudiant VALUES (20, 'DEMESSANT           ', 'Gaël               ');
+INSERT INTO public.etudiant VALUES (32, 'KERFANT             ', 'Noelle              ');
+INSERT INTO public.etudiant VALUES (41, 'PERON               ', 'Marie-Cécile       ');
+INSERT INTO public.etudiant VALUES (42, 'PODHORNA            ', 'Alina               ');
+
+
+--
+-- Data for Name: etudiant_td; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+INSERT INTO public.etudiant_td VALUES (1, 1, 5);
+INSERT INTO public.etudiant_td VALUES (2, 1, 6);
+INSERT INTO public.etudiant_td VALUES (3, 1, 5);
+INSERT INTO public.etudiant_td VALUES (4, 1, 6);
+INSERT INTO public.etudiant_td VALUES (5, 1, 5);
+INSERT INTO public.etudiant_td VALUES (6, 1, 6);
+INSERT INTO public.etudiant_td VALUES (7, 1, 5);
+INSERT INTO public.etudiant_td VALUES (8, 1, 6);
+INSERT INTO public.etudiant_td VALUES (9, 1, 5);
+INSERT INTO public.etudiant_td VALUES (10, 1, 6);
+INSERT INTO public.etudiant_td VALUES (11, 1, 5);
+INSERT INTO public.etudiant_td VALUES (12, 1, 6);
+INSERT INTO public.etudiant_td VALUES (13, 1, 5);
+INSERT INTO public.etudiant_td VALUES (14, 1, 6);
+INSERT INTO public.etudiant_td VALUES (15, 1, 5);
+INSERT INTO public.etudiant_td VALUES (16, 1, 6);
+INSERT INTO public.etudiant_td VALUES (17, 1, 5);
+INSERT INTO public.etudiant_td VALUES (18, 1, 6);
+INSERT INTO public.etudiant_td VALUES (19, 1, 5);
+INSERT INTO public.etudiant_td VALUES (20, 1, 6);
+INSERT INTO public.etudiant_td VALUES (21, 1, 5);
+INSERT INTO public.etudiant_td VALUES (22, 1, 6);
+INSERT INTO public.etudiant_td VALUES (23, 1, 5);
+INSERT INTO public.etudiant_td VALUES (24, 1, 6);
+INSERT INTO public.etudiant_td VALUES (25, 1, 5);
+INSERT INTO public.etudiant_td VALUES (26, 1, 6);
+INSERT INTO public.etudiant_td VALUES (27, 1, 5);
+INSERT INTO public.etudiant_td VALUES (28, 1, 6);
+INSERT INTO public.etudiant_td VALUES (29, 1, 5);
+INSERT INTO public.etudiant_td VALUES (30, 1, 6);
+INSERT INTO public.etudiant_td VALUES (31, 1, 5);
+INSERT INTO public.etudiant_td VALUES (32, 1, 6);
+INSERT INTO public.etudiant_td VALUES (33, 1, 5);
+INSERT INTO public.etudiant_td VALUES (34, 1, 6);
+INSERT INTO public.etudiant_td VALUES (35, 1, 5);
+INSERT INTO public.etudiant_td VALUES (36, 1, 6);
+INSERT INTO public.etudiant_td VALUES (37, 1, 5);
+INSERT INTO public.etudiant_td VALUES (38, 1, 6);
+INSERT INTO public.etudiant_td VALUES (39, 1, 5);
+INSERT INTO public.etudiant_td VALUES (40, 1, 6);
+INSERT INTO public.etudiant_td VALUES (41, 1, 5);
+INSERT INTO public.etudiant_td VALUES (42, 1, 6);
+INSERT INTO public.etudiant_td VALUES (43, 1, 5);
+INSERT INTO public.etudiant_td VALUES (44, 1, 6);
+INSERT INTO public.etudiant_td VALUES (45, 1, 5);
+INSERT INTO public.etudiant_td VALUES (46, 1, 6);
+INSERT INTO public.etudiant_td VALUES (47, 1, 5);
+INSERT INTO public.etudiant_td VALUES (48, 1, 6);
+INSERT INTO public.etudiant_td VALUES (49, 1, 5);
+INSERT INTO public.etudiant_td VALUES (50, 1, 6);
+INSERT INTO public.etudiant_td VALUES (51, 1, 5);
+INSERT INTO public.etudiant_td VALUES (52, 1, 6);
+INSERT INTO public.etudiant_td VALUES (53, 1, 5);
+INSERT INTO public.etudiant_td VALUES (54, 1, 6);
+INSERT INTO public.etudiant_td VALUES (55, 1, 5);
+
+
+--
+-- Data for Name: etudiant_ue; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+INSERT INTO public.etudiant_ue VALUES (1, 1);
+INSERT INTO public.etudiant_ue VALUES (2, 1);
+INSERT INTO public.etudiant_ue VALUES (3, 1);
+INSERT INTO public.etudiant_ue VALUES (4, 1);
+INSERT INTO public.etudiant_ue VALUES (5, 1);
+INSERT INTO public.etudiant_ue VALUES (6, 1);
+INSERT INTO public.etudiant_ue VALUES (7, 1);
+INSERT INTO public.etudiant_ue VALUES (8, 1);
+INSERT INTO public.etudiant_ue VALUES (9, 1);
+INSERT INTO public.etudiant_ue VALUES (10, 1);
+INSERT INTO public.etudiant_ue VALUES (11, 1);
+INSERT INTO public.etudiant_ue VALUES (12, 1);
+INSERT INTO public.etudiant_ue VALUES (13, 1);
+INSERT INTO public.etudiant_ue VALUES (14, 1);
+INSERT INTO public.etudiant_ue VALUES (15, 1);
+INSERT INTO public.etudiant_ue VALUES (16, 1);
+INSERT INTO public.etudiant_ue VALUES (17, 1);
+INSERT INTO public.etudiant_ue VALUES (18, 1);
+INSERT INTO public.etudiant_ue VALUES (19, 1);
+INSERT INTO public.etudiant_ue VALUES (20, 1);
+INSERT INTO public.etudiant_ue VALUES (21, 1);
+INSERT INTO public.etudiant_ue VALUES (22, 1);
+INSERT INTO public.etudiant_ue VALUES (23, 1);
+INSERT INTO public.etudiant_ue VALUES (24, 1);
+INSERT INTO public.etudiant_ue VALUES (25, 1);
+INSERT INTO public.etudiant_ue VALUES (26, 1);
+INSERT INTO public.etudiant_ue VALUES (27, 1);
+INSERT INTO public.etudiant_ue VALUES (28, 1);
+INSERT INTO public.etudiant_ue VALUES (29, 1);
+INSERT INTO public.etudiant_ue VALUES (30, 1);
+INSERT INTO public.etudiant_ue VALUES (31, 1);
+INSERT INTO public.etudiant_ue VALUES (32, 1);
+INSERT INTO public.etudiant_ue VALUES (33, 1);
+INSERT INTO public.etudiant_ue VALUES (34, 1);
+INSERT INTO public.etudiant_ue VALUES (35, 1);
+INSERT INTO public.etudiant_ue VALUES (36, 1);
+INSERT INTO public.etudiant_ue VALUES (37, 1);
+INSERT INTO public.etudiant_ue VALUES (38, 1);
+INSERT INTO public.etudiant_ue VALUES (39, 1);
+INSERT INTO public.etudiant_ue VALUES (40, 1);
+INSERT INTO public.etudiant_ue VALUES (41, 1);
+INSERT INTO public.etudiant_ue VALUES (42, 1);
+INSERT INTO public.etudiant_ue VALUES (43, 1);
+INSERT INTO public.etudiant_ue VALUES (44, 1);
+INSERT INTO public.etudiant_ue VALUES (45, 1);
+INSERT INTO public.etudiant_ue VALUES (46, 1);
+INSERT INTO public.etudiant_ue VALUES (47, 1);
+INSERT INTO public.etudiant_ue VALUES (48, 1);
+INSERT INTO public.etudiant_ue VALUES (49, 1);
+INSERT INTO public.etudiant_ue VALUES (50, 1);
+INSERT INTO public.etudiant_ue VALUES (51, 1);
+INSERT INTO public.etudiant_ue VALUES (52, 1);
+INSERT INTO public.etudiant_ue VALUES (53, 1);
+INSERT INTO public.etudiant_ue VALUES (54, 1);
+INSERT INTO public.etudiant_ue VALUES (55, 1);
+
+
+--
+-- Data for Name: td; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+INSERT INTO public.td VALUES (1, 5, 'lundi   ', '08H00-10H30', '523 A2    ');
+INSERT INTO public.td VALUES (1, 6, 'mardi   ', '08H00-10H30', '522 D     ');
+
+
+--
+-- Data for Name: ue; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+INSERT INTO public.ue VALUES (1, 'Informatique 3      ');
+
+
+--
+-- Name: SCHEMA public; Type: ACL; Schema: -; Owner: -
+--
+
+REVOKE ALL ON SCHEMA public FROM PUBLIC;
+REVOKE ALL ON SCHEMA public FROM postgres;
+GRANT ALL ON SCHEMA public TO postgres;
+GRANT USAGE ON SCHEMA public TO PUBLIC;
+GRANT CREATE ON SCHEMA public TO soto;
+
+
+--
+-- Name: TABLE etudiant; Type: ACL; Schema: public; Owner: -
+--
+
+REVOKE ALL ON TABLE public.etudiant FROM PUBLIC;
+REVOKE ALL ON TABLE public.etudiant FROM soto;
+GRANT INSERT,REFERENCES,DELETE,TRIGGER,UPDATE ON TABLE public.etudiant TO soto;
+GRANT SELECT ON TABLE public.etudiant TO PUBLIC;
+
+
+--
+-- Name: TABLE etudiant_td; Type: ACL; Schema: public; Owner: -
+--
+
+REVOKE ALL ON TABLE public.etudiant_td FROM PUBLIC;
+REVOKE ALL ON TABLE public.etudiant_td FROM soto;
+GRANT ALL ON TABLE public.etudiant_td TO soto;
+GRANT SELECT ON TABLE public.etudiant_td TO PUBLIC;
+
+
+--
+-- Name: TABLE etudiant_ue; Type: ACL; Schema: public; Owner: -
+--
+
+REVOKE ALL ON TABLE public.etudiant_ue FROM PUBLIC;
+REVOKE ALL ON TABLE public.etudiant_ue FROM soto;
+GRANT ALL ON TABLE public.etudiant_ue TO soto;
+GRANT SELECT ON TABLE public.etudiant_ue TO PUBLIC;
+
+
+--
+-- Name: TABLE td; Type: ACL; Schema: public; Owner: -
+--
+
+REVOKE ALL ON TABLE public.td FROM PUBLIC;
+REVOKE ALL ON TABLE public.td FROM soto;
+GRANT ALL ON TABLE public.td TO soto;
+GRANT SELECT ON TABLE public.td TO PUBLIC;
+
+
+--
+-- Name: TABLE ue; Type: ACL; Schema: public; Owner: -
+--
+
+REVOKE ALL ON TABLE public.ue FROM PUBLIC;
+REVOKE ALL ON TABLE public.ue FROM soto;
+GRANT ALL ON TABLE public.ue TO soto;
+GRANT SELECT ON TABLE public.ue TO PUBLIC;
+
+
+--
+-- PostgreSQL database dump complete
+--
+
