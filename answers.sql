@@ -107,6 +107,13 @@ where lieu_tournoi = 'Roland Garros'
 group by nom_joueur
 having min(prime)>=1000000;
 
+--   5)
+select x.nom_joueur from gain x
+where 1000000 <= all(
+    select prime from gain y
+    where y.lieu_tournoi = 'Roland Garros' and y.nom_joueur = x.nom_joueur
+) and x.lieu_tournoi = 'Roland Garros';
+
 -- m)
 --   1)
 (
@@ -161,12 +168,54 @@ where x.nom = z.nom_gagnant and y.nom = z.nom_perdant;
 
 -- o)
 
-select nom from joueur
-where not exists(
-    select * from rencontre where 
-    nom_gagnant != nom and nom_perdant != nom
-);
+select nom_joueur from 
+(
+    select nom_joueur,count(distinct date) from gain
+    where lieu_tournoi = 'Roland Garros'
+    group by nom_joueur
+    ) x,
+(
+    select count( distinct date) from gain
+    where lieu_tournoi = 'Roland Garros'
+    ) y
+where x.count = y.count;
+
+-- p)
+
+select count(distinct nom_joueur) from gain
+where lieu_tournoi = 'Wimbledon' and date = 1989;
+
+-- q)
+
+select date, avg(prime) from gain
+group by date;
+
+-- r)
+
+select distinct nom, prenom from joueur
+order by nom;
+
+-- s)
+
+insert into joueur
+values ('Herrmann','Jules',2002,'Francais');
 
 
+-- t)
+update joueur 
+set anneenaissance = 2020
+where nom = 'Herrmann';
 
+-- u)
+delete from joueur
+where nom = 'Herrmann';
 
+-- v)
+delete from rencontre
+where nom_gagnant = 'Noah' or nom_perdant = 'Noah';
+
+delete from gain
+where nom_joueur = 'Noah';
+
+delete from joueur
+where nom = 'Noah';
