@@ -168,6 +168,17 @@ where x.nom = z.nom_gagnant and y.nom = z.nom_perdant;
 
 -- o)
 
+--   1)
+select nom_joueur from gain
+where lieu_tournoi = 'Roland Garros'
+group by nom_joueur
+having count(distinct date) = (
+    select count(distinct date)
+    from gain
+    where lieu_tournoi = 'Roland Garros'
+);
+
+--   2)
 select nom_joueur from 
 (
     select nom_joueur,count(distinct date) from gain
@@ -179,6 +190,18 @@ select nom_joueur from
     where lieu_tournoi = 'Roland Garros'
     ) y
 where x.count = y.count;
+
+--   4)
+select nom from joueur
+where not exists(
+    select date from gain 
+    where lieu_tournoi = 'Roland Garros'
+
+    except
+
+    select date from gain
+    where lieu_tournoi = 'Roland Garros' and nom_joueur = nom
+);
 
 -- p)
 
@@ -192,8 +215,17 @@ group by date;
 
 -- r)
 
-select distinct nom, prenom from joueur
+select
+    nom,
+    prenom,
+from joueur
 order by nom;
+
+select count(y.nom) as numero,x.nom,x.prenom
+from joueur x, joueur y
+where x.nom >= y.nom
+group by x.nom,x.prenom
+order by numero;
 
 -- s)
 
@@ -211,6 +243,8 @@ delete from joueur
 where nom = 'Herrmann';
 
 -- v)
+
+--   1)
 delete from rencontre
 where nom_gagnant = 'Noah' or nom_perdant = 'Noah';
 
@@ -219,3 +253,29 @@ where nom_joueur = 'Noah';
 
 delete from joueur
 where nom = 'Noah';
+
+delete from rencontre x, gain y, joueur z
+where x.nom_gagnant = 'Noah' or x.nom_perdant = 'Noah'
+and y.nom_joueur = 'Noah'
+and z.nom = 'Noah';
+
+--   2)
+
+/* On cherche à mettre l'option ON DELETE CASCADE sur la 
+contrainte de clé étrangère du gain */
+
+alter table gain
+drop constraint gain_nom_joueur_fkey;
+
+alter table gain 
+add foreign key (nom_joueur) references joueur (nom) on delete cascade;
+
+alter table rencontre
+drop constraint rencontre_nom_gagnant_fkey;
+
+alter table rencontre
+drop 
+
+
+foreign key (nom_gagnant,lieu_tournoi, date) references gain (nom_joueur, lieu_tournoi, date),
+foreign key (nom_perdant,lieu_tournoi, date) references gain (nom_joueur, lieu_tournoi, date)
