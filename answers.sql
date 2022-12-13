@@ -268,14 +268,82 @@ alter table gain
 drop constraint gain_nom_joueur_fkey;
 
 alter table gain 
-add foreign key (nom_joueur) references joueur (nom) on delete cascade;
+add foreign key (nom_joueur) references joueur (nom)
+on delete cascade;
 
 alter table rencontre
 drop constraint rencontre_nom_gagnant_fkey;
 
 alter table rencontre
-drop 
+add foreign key (nom_gagnant,lieu_tournoi,date) references gain (nom_joueur,lieu_tournoi,date)
+on delete cascade;
+
+alter table rencontre
+drop constraint rencontre_nom_perdant_fkey;
+
+alter table rencontre
+add foreign key (nom_perdant, lieu_tournoi, date) references gain (nom_joueur, lieu_tournoi, date)
+on delete cascade;
+
+/* Après on peut utiliser  */
+
+delete from joueur
+where nom = 'Noah';
+
+-- x)
+
+delete from joueur
+where (
+    select sum(prime) from gain
+    where nom_joueur = nom
+) < 200000;
 
 
-foreign key (nom_gagnant,lieu_tournoi, date) references gain (nom_joueur, lieu_tournoi, date),
-foreign key (nom_perdant,lieu_tournoi, date) references gain (nom_joueur, lieu_tournoi, date)
+-- y)
+
+/* 
+Modifications à effectuer :
+- créer la table tournoi
+- la remplir avec les valeurs de tout les tournois présents dans la base
+- enlever les 2 clé étrangère de rencontre
+- ajouter à gain un clé étrangère référant lieu_tournoi et date à la table
+  tournoi
+- ajouter à rencontre une clé étrangère référant lieu_tournoi et date à la 
+  table tournoi
+*/
+
+create table tournoi (
+    lieu_tournoi char (20) not null,
+    date integer
+);
+
+insert into tournoi (lieu_tournoi,date)
+select distinct lieu_tournoi, date
+from gain
+;
+
+alter table tournoi
+add primary key (lieu_tournoi,date);
+
+alter table rencontre
+drop constraint rencontre_nom_perdant_fkey;
+
+alter table rencontre
+drop constraint rencontre_nom_gagnant_fkey;
+
+alter table rencontre
+add foreign key (lieu_tournoi,date) references tournoi (lieu_tournoi,date)
+on delete cascade;
+
+alter table rencontre
+add foreign key (nom_gagnant) references joueur (nom)
+on delete cascade;
+
+alter table rencontre
+add foreign key (nom_perdant) references joueur (nom)
+on delete cascade;
+
+alter table gain
+add foreign key (lieu_tournoi,date) references tournoi (lieu_tournoi,date)
+on delete cascade;
+
